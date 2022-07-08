@@ -88,17 +88,20 @@ class Game:
 
     def msg(self):
         txt = ''
-        if self.win == '':
-            if self.playerTurn == self.playerNB:
-                txt = "Your Turn"
+        if self.playerNB == '1' or self.playerNB == '2':
+            if self.win == '':
+                if self.playerTurn == self.playerNB:
+                    txt = "Your Turn"
+                else:
+                    txt = "Your Opponent Turn"
+            elif self.win == 't':
+                txt = "Tie!"
+            elif self.win == self.playerNB:
+                txt = "You won the game, GG!"
             else:
-                txt = "Your Opponent Turn"
-        elif self.win == 't':
-            txt = "Tie!"
-        elif self.win == self.playerNB:
-            txt = "You won the game, GG!"
+                txt = "You lost..."
         else:
-            txt = "You lost..."
+            txt = "Spectating"
 
         text = self.font.render(txt, False, (255, 255, 255), (0, 0, 0))
         self.screen.blit(text, (150-(10*len(txt)/2), 350))
